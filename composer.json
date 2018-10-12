@@ -1,0 +1,20 @@
+{
+    "name": "inauvergne/project_template",
+    "description": "Projet Hackathon InAuvergne",
+    "authors": [
+        {
+            "name": "Aubind97",
+            "email": "aubind97@orange.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Api\\": "api"
+        }
+    },
+    "require": {
+        "slim/slim": "^3.0",
+        "vlucas/phpdotenv": "^2.5",
+        "usmanhalalit/pixie": "^2.0"
+    }
+}
