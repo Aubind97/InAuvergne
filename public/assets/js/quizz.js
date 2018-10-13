@@ -7,8 +7,10 @@ class Quizz{
 
     constructor(root,quizzData)
     {
-        this.createQuizz(root,quizzData[0]);
-        console.log(quizzData[0].responses[0].reponse)
+        this.quizzData = quizzData;
+        this.currentQuestion = 0;
+        this.createQuizz(root);
+        console.log(this.quizzData[0].responses[0].reponse)
 
         this.quizz_button_ready.addEventListener('click',this.goToReponse.bind(this));
     }
@@ -24,7 +26,17 @@ class Quizz{
         this.setVisibility(this.support_question,"hide");
         this.setVisibility(this.quizz__container,"show");
 
-        document.getElementById(this.quizz_see_support).addEventListener('click',(this.displaySupport.bind(this)));
+        for(let i=0; i < this.quizzData[this.currentQuestion].responses.length;i++){
+            this.div_reponses[i].addEventListener('click',this.clickOnResponse(i).bind(this));
+        }
+
+        this.quizz_see_support.addEventListener('click',(this.displaySupport.bind(this)));
+    }
+
+    clickOnResponse(number)
+    {
+        /* On regarde si la reponse est la bonne et on passe à la suivante */
+        console.log("tu as cliqué sur la réponse " + number);
     }
 
     displaySupport(){
@@ -37,30 +49,34 @@ class Quizz{
         element.className = visibility;
     }
 
-    createQuizz(root,quizzData)
+    /* Lance la création de l'html du quizz
+    * @PARAM {root} correspond au noeud où on rattache le quizz
+    *
+    */
+    createQuizz(root)
     {
         let container = this.createDivWithClass("quizz_container")
 
         // Nom du quizz
         let nom_question = this.createDivWithClass("quizz_nom");
         let nom_question_texte = document.createElement("span");
-        nom_question_texte.innerText = quizzData.nom_quizz;
+        nom_question_texte.innerText = this.quizzData[this.currentQuestion].nom_quizz;
         nom_question.appendChild(nom_question_texte); /* on ajoute les réponse dans le span */
 
         container.appendChild(nom_question);
 
-        this.support_question = this.createDivWithClass("quizz_support_question");
+        this.support_question = this.createDivWithClass("show","quizz_support_question");
         // Affichage du support de la question
-        if(quizzData.url_img != "")
+        if(this.quizzData[this.currentQuestion].url_img != "")
         {
             let support_question_img = document.createElement("img");
-            support_question_img.setAttribute("src","../assets/img/" + quizzData.url_img);
+            support_question_img.setAttribute("src","../assets/img/" + this.quizzData[this.currentQuestion].url_img);
             this.support_question.appendChild(support_question_img);
         }
-        else if(quizzData.lien_video != "")
+        else if(this.quizzData[this.currentQuestion].lien_video != "")
         {
             let support_question_video = document.createElement("iframe");
-            support_question_video.setAttribute("src",quizzData.lien_video);
+            support_question_video.setAttribute("src",this.quizzData[this.currentQuestion].lien_video);
             support_question_video.setAttribute("width","100%");
             support_question_video.setAttribute("frameborder","0");
 
@@ -79,12 +95,14 @@ class Quizz{
 
         container.appendChild(this.quizz_see_support);
         this.texts = [];
+        this.div_reponses = [];
 
         this.quizz__container = this.createDivWithClass("hide","quizz_response_container");
 
-        for(let i=0;i < 4;i++)
+        for(let i=0;i < this.quizzData[this.currentQuestion].responses.length;i++)
         {
-            let reponse1 = this.createDivWithClass("hide","quizz_reponse");
+            let reponse = this.createDivWithClass("hide","quizz_reponse");
+            this.div_reponses.push(reponse);
             let circle = this.createDivWithClass("quizz_reponse_circle");
             let text_circle = document.createElement("span");
             text_circle.innerText = i;
@@ -92,13 +110,13 @@ class Quizz{
 
             let texte = this.createDivWithClass("quizz_reponse_text");
             let innerText = document.createElement("span");
-            innerText.innerText = quizzData.responses[i].reponse;
+            innerText.innerText = this.quizzData[this.currentQuestion].responses[i].reponse;
             texte.appendChild(innerText); /* on ajoute les réponse dans le span */
             this.texts.push(texte); /* on enregistre les textes */
 
-            reponse1.appendChild(circle);
-            reponse1.appendChild(texte);
-            this.quizz__container.appendChild(reponse1);
+            reponse.appendChild(circle);
+            reponse.appendChild(texte);
+            this.quizz__container.appendChild(reponse);
 
             container.appendChild(this.quizz__container);
         }
@@ -155,7 +173,22 @@ document.addEventListener('DOMContentLoaded', function () {
             {reponse: "Paris"},
             {reponse: "Marseille"},
             {reponse: "Toulouse"},
-            {reponse: "Cognac"}]
+            {reponse: "Cognac"}],
+        correct_response: "Paris"
+    },
+    {
+        nom_quizz: "Quizz : Les capitales",
+        id_question: 2,
+        question: "Savez-vous quelle est la capitale de l'Italie",
+        url_img: "italie.jpg",
+        text: "",
+        lien_video: "",
+        responses : [
+            {reponse: "Rome"},
+            {reponse: "Venise"},
+            {reponse: "Turin"},
+            {reponse: "Milan"}],
+        correct_response: "Paris"
     }];
 
     console.log(quizzData[0].id_question);
