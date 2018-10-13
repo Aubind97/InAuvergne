@@ -14,6 +14,9 @@ class Login
     }
 
     initSubmitButton() {
+        sessionStorage.removeItem('username')
+        sessionStorage.removeItem('token')
+
         this.submitButton.addEventListener('click', (evt) => {
             evt.preventDefault()
             if (this.usernameInput !== '' && this.passwordInput !== '') {
@@ -22,13 +25,24 @@ class Login
                     password: this.passwordInput.value
                 })
                 .then((res) => {
-                    if (res !== []) {
+                    // C'est un objet... (pas fou)
+                    if (res.data.length === undefined) {
                         sessionStorage.setItem('username', res.data.username)
-                        window.location = '/' // On redirige vers le dashboard
+                        sessionStorage.setItem('token', res.data.token)
+                        window.location = '/public/pages/dashboard.html' // On redirige vers le dashboard
                     }
                 })
             }
         })
     }
 
+    static isLoggedIn()
+    {
+        // Checker si c'est le meme que en BDD
+        if (sessionStorage.getItem('token') === null) {
+            sessionStorage.removeItem('user')
+            sessionStorage.removeItem('token')
+            window.location = '/'
+        }
+    }
 }

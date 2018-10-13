@@ -10,19 +10,22 @@
 </head>
 
 <body>
-    <h1>Connexion</h1>
-
-    <form method="POST" id="loginForm">
-        <label>
-            Identifiant
-            <input type="text" name="username" id="username">
-        </label>
-        <label>
-            Mot de passe
-            <input type="password" name="password" id="password">
-        </label>
-        <button type="submit" id="submitButton">Se connecter</button>
-    </form>
+    <div class="container">
+        <div class="loginCard">
+            <h1 class="loginCard__title">Connexion</h1>
+            <form method="POST" id="loginForm" class="loginCard__form">
+                <label>
+                    <span>Identifiant</span>
+                    <input type="text" name="username" id="username">
+                </label>
+                <label>
+                    <span>Mot de passe</span>
+                    <input type="password" name="password" id="password">
+                </label>
+                <button type="submit" id="submitButton">Se connecter</button>
+            </form>
+        </div>
+    </div>
 
     <script src="/public/assets/js/libs/axios.min.js"></script>
     <script src="/public/assets/js/Login.js"></script>
@@ -30,6 +33,7 @@
         const connexion = new Login({
             form: 'loginForm'
         })
+
     </script>
 </body>
 

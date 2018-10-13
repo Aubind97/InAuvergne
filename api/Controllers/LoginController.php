@@ -26,7 +26,9 @@ class LoginController
 
         if (!empty($user) && $password = $user[0]->password) {
             $token = 'unSuperToken';
-            // On met le token dans la base
+            // On met le token dans la base mais pas le time...
+            // Et on met la date de première connexion si c'ets pas set
+            $this->users->setConnectionToken($token, $user[0]->id);
 
             return $response->withJSON([
                 'username' => $user[0]->username,
