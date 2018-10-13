@@ -4,27 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>InAuvergne</title>
+    <title>Connexion</title>
 
     <link rel="stylesheet" href="public/assets/css/main.css">
 </head>
 
 <body>
+    <div class="container">
+        <div class="loginCard">
+            <h1 class="loginCard__title">Connexion</h1>
+            <form method="POST" id="loginForm" class="loginCard__form">
+                <label>
+                    <span>Identifiant</span>
+                    <input type="text" name="username" id="username">
+                </label>
+                <label>
+                    <span>Mot de passe</span>
+                    <input type="password" name="password" id="password">
+                </label>
+                <button type="submit" id="submitButton">Se connecter</button>
+            </form>
+        </div>
+    </div>
 
-    <label>Dire bonjour à
-        <input type="text">
-    </label>
-    <i class="fas fa-hand-peace"></i>
-
-    <h1 id="hello"></h1>
-
-    <script src="public/assets/js/libs/axios.min.js"></script>
+    <script src="/public/assets/js/libs/axios.min.js"></script>
+    <script src="/public/assets/js/Login.js"></script>
     <script>
-        document.getElementsByTagName('input')[0].addEventListener('blur', (elt) => {
-            axios.get(`http://localhost:8000/api/${elt.target.value}`)
-                .then((res) => {
-                    document.getElementById('hello').innerText = `Bonjour ${res.data.name}`
-                })
+        const connexion = new Login({
+            form: 'loginForm'
         })
 
     </script>

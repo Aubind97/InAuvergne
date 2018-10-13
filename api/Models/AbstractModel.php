@@ -9,7 +9,7 @@ class AbstractModel
   /**
   * @var QueryBuilderHandler
   */
-  private $qb;
+  protected $qb;
 
   public function __construct(Container $container)
   {

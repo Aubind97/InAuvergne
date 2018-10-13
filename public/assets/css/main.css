@@ -1,3 +1,9 @@
+html, body {
+  margin: 0; }
+
+* {
+  font-family: 'Roboto'; }
+
 /*!
  * Font Awesome Free 5.3.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -3799,3 +3805,73 @@ readers do not read off random characters that represent icons */
 .fas {
   font-family: 'Font Awesome 5 Free';
   font-weight: 900; }
+
+.container {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ecf0f1; }
+
+.loginCard {
+  height: 400px;
+  width: 600px;
+  background-color: #FFF;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .loginCard__title {
+    color: #34495e; }
+  .loginCard__form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .loginCard__form label span {
+      display: inline-block;
+      width: 100px;
+      text-align: right; }
+    .loginCard__form input {
+      border: 1px solid #ecf0f1;
+      margin: 8px;
+      border-radius: 4px;
+      padding: 8px; }
+    .loginCard__form button {
+      margin: 16px;
+      background-color: #34495e;
+      border-radius: 4px;
+      font-weight: bold;
+      color: #FFF;
+      border: none;
+      padding: 8px 16px;
+      border: 2px solid #34495e; }
+      .loginCard__form button:hover {
+        background-color: transparent;
+        color: #34495e;
+        cursor: pointer; }
