@@ -1,7 +1,9 @@
 body{
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(245, 196, 196);
 }
-
+a:visited{
+    color: black;
+}
 
 // CARD
 .card__card{
@@ -11,11 +13,21 @@ body{
     width: 400px;
     border-radius: 5%;
     //box-shadow: 8px 8px 12px #aaa;
-    h1, p, span{
+    h1, p, span, a {
         margin: 0%;
         font-family: 'Roboto', 'New Courrier';
     }
 
+    .card__title{
+        a {
+            text-decoration: none;
+            font-size: 26px;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+
+    }
     p {
         margin-bottom: 5%;
     }
