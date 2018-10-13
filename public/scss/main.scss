@@ -1,8 +1,7 @@
 @import '_vars';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import 'fontawesome/fontawesome';
 @import "fontawesome/solid.scss";
 // @import "fontawesome/brands.scss";
 
-body{
-    background-color: red;
-}
+@import '_card';

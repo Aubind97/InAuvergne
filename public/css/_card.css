@@ -1,0 +1,6 @@
+.card__container {
+  width: 20%; }
+  .card__container .card__caption {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; }

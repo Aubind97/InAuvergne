@@ -1,0 +1,35 @@
+body{
+    background-color: rgb(255, 255, 255);
+}
+
+
+// CARD
+.card__card{
+    padding: 1%;
+    background-color: rgb(207, 204, 204);
+
+    width: 400px;
+    border-radius: 5%;
+    //box-shadow: 8px 8px 12px #aaa;
+    h1, p, span{
+        margin: 0%;
+        font-family: 'Roboto', 'New Courrier';
+    }
+
+    p {
+        margin-bottom: 5%;
+    }
+    .card__data_publish{
+        margin-top: 0%;
+    }
+    .card__img img{
+        width: 100%;
+    }
+
+
+
+    .card__infos{
+        display: flex;
+        justify-content: space-around;
+    }
+}
