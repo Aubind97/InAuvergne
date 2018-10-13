@@ -1,6 +1,9 @@
 ### DEV ENV ###
 .env
 
+### Prepros
+prepros-6.config
+
 ### Composer ###
 composer.phar
 /vendor/
