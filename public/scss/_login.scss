@@ -1,0 +1,61 @@
+.container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $off;
+}
+
+.loginCard{
+    height: 400px;
+    width: 600px;
+    background-color: #FFF;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__title{
+        color: $primary;
+    }
+
+    &__form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        label{
+            span{
+                display: inline-block;
+                width: 100px;
+                text-align: right;
+            }
+        }
+
+        input{
+            border: 1px solid $off;
+            margin: 8px;
+            border-radius: 4px;
+            padding: 8px;
+        }
+
+        button{
+            margin: 16px;
+            background-color: $primary;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #FFF;
+            border: none;
+            padding: 8px 16px;
+            border: 2px solid $primary;
+
+            &:hover{
+                background-color: transparent;
+                color: $primary;
+                cursor: pointer;
+            }
+        }
+    }
+}

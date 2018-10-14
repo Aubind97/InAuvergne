@@ -17,6 +17,11 @@ class Quizz{
         this.init = false;
         this.quizzData = quizzData;
         this.currentQuestion = 0;
+
+        // axios.get('/api/quizz/id')
+        //.then((res) => {
+        // this.quizzData  = res.data
+        //})
         this.createQuizz(root);
         console.log(this.quizzData[0].responses[0].reponse)
 

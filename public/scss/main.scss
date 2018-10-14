@@ -1,6 +1,7 @@
 @import '_vars';
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+@import '_reset';
 @import 'fontawesome/fontawesome';
 @import "fontawesome/solid.scss";
 // @import "fontawesome/brands.scss";
@@ -8,3 +9,7 @@
 
 @import '_question_card';
 @import '_quizz';
+@import '_header';
+@import '_login';
+@import '_process';
+@import '_card';

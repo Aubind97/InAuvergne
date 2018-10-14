@@ -1,0 +1,210 @@
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Miho | Dashboard</title>
+
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="icon" type="image/png" href="../assets/img/icon.png" />
+</head>
+
+<body>
+    <!-- ON REGARDE SI L'UTILISATEUR EST LOG -->
+    <script src="../assets/js/libs/axios.min.js"></script>
+    <script src="../assets/js/Login.js"></script>
+    <script>
+        Login.isLoggedIn();
+
+    </script>
+
+    <header class="header">
+        <div class="header__brand">
+            <img src="../assets/img/icon.png" alt="Icon de Miho">
+            <h2 class="header__brand__name">Miho</h2>
+        </div>
+        <div class="header__actions">
+            <h2 class="header__actions__hello">Bonjour, <span class="header__actions__hello__name">...</span></h2>
+            <button class="header__actions__logout" id="logoutButton"><i class="fas fa-power-off"></i></button>
+        </div>
+    </header>
+
+    <main id="container">
+        <div class="card card--full">
+            <h3 class="card__title">Ton profil</h3>
+            <section class="card__container">
+                <div class="stats__container">
+                    <h3>Résultats du mois</h3>
+                    <div class="stats">
+                        <i class="fas fa-eye"></i>
+                        <span style="margin-left: 8px"></span>
+                        <span class="process" data-type="validate" data-process="87"></span>
+                    </div>
+                    <div class="stats">
+                        <i class="fas fa-music"></i>
+                        <span class="process" data-type="validate" data-process="61.5"></span>
+                    </div>
+                </div>
+                <div id="chart" style="display: inline-block"></div>
+            </section>
+        </div>
+        <div class="card">
+            <h3 class="card__title">Revenir sur un Quizz</h3>
+            <section id="quizzListAlreadyDone" class="card__container"></section>
+        </div>
+        <div class="card">
+            <h3 class="card__title">Les nouveaux Quizz</h3>
+            <section class="card__container">
+                <section id="quizzList" class="card__container"></section>
+            </section>
+        </div>
+    </main>
+
+    <script src="../assets/js/libs/highChart.min.js"></script>
+    <script src="../assets/js/QuizzLister.js"></script>
+    <script src="../assets/js/Process.js"></script>
+    <script>
+        // Init logout button
+        Login.initLogoutButton();
+
+        // Récupère l'utilisateur en session
+        document.querySelector('.header__actions__hello__name').innerText = sessionStorage.getItem('username')
+
+        // Met en place les process bar
+        Process.init()
+
+        let quizzData = [{
+                id: 1,
+                name: 'Test Psychotechnique',
+                description: 'Je suis une description',
+                nbQuestions: 10,
+                publishedDate: '2018-01-01'
+            },
+            {
+                id: 2,
+                name: 'Méthode agile',
+                description: 'Je suis une description',
+                nbQuestions: 9,
+                publishedDate: '2018-02-01'
+            },
+            {
+                id: 3,
+                name: 'Après git, Git Flow',
+                description: 'Je suis une description',
+                nbQuestions: 10,
+                publishedDate: '2018-05-01'
+            },
+            {
+                id: 4,
+                name: 'Culture d\'entreprise',
+                description: 'Je suis une description',
+                nbQuestions: 10,
+                publishedDate: '2018-01-01'
+            },
+            {
+                id: 5,
+                name: 'Méthode agile',
+                description: 'Je suis une description',
+                nbQuestions: 10,
+                publishedDate: '2018-02-01'
+            },
+            {
+                id: 6,
+                name: 'Après git, Git Flow',
+                description: 'Je suis une description',
+                nbQuestions: 10,
+                publishedDate: '2018-05-01'
+            }
+        ]
+
+        let quizzDataDone = [{
+                id: 1,
+                name: 'Capitales',
+                description: 'Je suis une description',
+                nbQuestions: 10,
+                nbVisualQuestions: 6,
+                nbOralQuestions: 4,
+                publishedDate: '2018-01-01'
+            },
+            {
+                id: 2,
+                name: 'Les annimaux',
+                description: 'Je suis une description',
+                nbQuestions: 10,
+                nbVisualQuestions: 9,
+                nbOralQuestions: 1,
+                publishedDate: '2018-02-01'
+            },
+            {
+                id: 3,
+                name: 'Le saviez vous ?',
+                description: 'Je suis une description',
+                nbQuestions: 10,
+                nbVisualQuestions: 5,
+                nbOralQuestions: 5,
+                publishedDate: '2018-05-01'
+            }
+        ]
+
+        const QuizzList = new QuizzLister({
+            container: 'quizzList',
+            data: quizzData
+        })
+
+        const QuizzListAlreadyDone = new QuizzLister({
+            container: 'quizzListAlreadyDone',
+            done: true,
+            data: quizzDataDone
+        })
+
+        // Chart
+        Highcharts.chart('chart', {
+
+            title: {
+                text: null
+            },
+
+            yAxis: {
+                title: {
+                    text: 'Nombre de bonnes réponses'
+                }
+            },
+            xAxis: {
+                type: 'category',
+            },
+
+            legend: {
+                enabled: false,
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+
+            series: [{
+                name: 'Bonne réponse',
+                color: '#63991d',
+                data: [10, 2, 13, 1/public/pages/quizz.html5, 16, 38, 40, 42]
+            }],
+
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>

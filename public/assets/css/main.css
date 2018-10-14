@@ -1,4 +1,27 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
+* {
+  font-family: 'Roboto'; }
+
+html, body {
+  margin: 0; }
+
+#container {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  width: 100vw;
+  padding: 66px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  grid-gap: 64px;
+  background-color: #ecf0f1; }
+
 /*!
  * Font Awesome Free 5.3.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -3801,9 +3824,6 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-weight: 900; }
 
-body {
-  background-color: #f5c4c4; }
-
 a:visited {
   color: black; }
 
@@ -3832,11 +3852,6 @@ a:visited {
     display: flex;
     -ms-flex-pack: distribute;
     justify-content: space-around; }
-
-body {
-  margin-left: 380px;
-  margin-right: 380px;
-  background-color: #c9cecf; }
 
 .quizz {
   margin-top: 100px;
@@ -3932,7 +3947,7 @@ span, h1, p {
   #quizz_ready_button span {
     text-align: center;
     width: 100px;
-    background-color: #c9cecf;
+    background-color: #ecf0f1;
     border-radius: 10px;
     padding: 8px 16px;
     cursor: pointer; }
@@ -3966,3 +3981,217 @@ span, h1, p {
 
 .hide {
   display: none; }
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  height: 64px;
+  width: 100%; }
+  .header__brand {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .header__brand img {
+      height: 60%; }
+    .header__brand__name {
+      margin: 16px; }
+  .header__actions {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .header__actions__hello {
+      font-size: 20px;
+      font-weight: normal; }
+      .header__actions__hello__name {
+        font-weight: bold; }
+    .header__actions__logout {
+      margin-left: 16px;
+      border: none;
+      background: none;
+      font-size: 24px; }
+      .header__actions__logout:hover {
+        cursor: pointer;
+        color: #c0392b; }
+
+.container {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ecf0f1; }
+
+.loginCard {
+  height: 400px;
+  width: 600px;
+  background-color: #FFF;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .loginCard__title {
+    color: #34495e; }
+  .loginCard__form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .loginCard__form label span {
+      display: inline-block;
+      width: 100px;
+      text-align: right; }
+    .loginCard__form input {
+      border: 1px solid #ecf0f1;
+      margin: 8px;
+      border-radius: 4px;
+      padding: 8px; }
+    .loginCard__form button {
+      margin: 16px;
+      background-color: #34495e;
+      border-radius: 4px;
+      font-weight: bold;
+      color: #FFF;
+      border: none;
+      padding: 8px 16px;
+      border: 2px solid #34495e; }
+      .loginCard__form button:hover {
+        background-color: transparent;
+        color: #34495e;
+        cursor: pointer; }
+
+.process {
+  display: inline-block;
+  position: relative;
+  background-color: #ecf0f1;
+  height: 5px;
+  width: 200px;
+  border-radius: 2px;
+  margin-left: 8px;
+  overflow: hidden; }
+  .process--validate {
+    content: '';
+    position: absolute;
+    display: block;
+    height: 5px;
+    background-color: #63991d; }
+  .process--failed {
+    content: '';
+    position: absolute;
+    display: block;
+    height: 5px;
+    background-color: #c0392b; }
+
+.card {
+  background-color: #FFF;
+  border-radius: 8px;
+  width: 90%;
+  min-width: 300px;
+  height: 80%;
+  min-width: 200px;
+  padding: 32px; }
+  .card--full {
+    grid-column: 1/3; }
+  .card__title {
+    font-size: 24px;
+    margin: 0;
+    padding-bottom: 6px; }
+
+.card__container {
+  position: relative;
+  height: 260px;
+  overflow-y: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  .card__container #chart {
+    height: 300px; }
+  .card__container .stats__container {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    height: 100px; }
+    .card__container .stats__container .stats {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      display: -webkit-inline-box;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      margin: 20px; }
+
+.cardItem {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-bottom: 2px solid #ecf0f1;
+  padding: 8px 0;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1);
+  margin: 16px;
+  padding: 16px;
+  cursor: pointer; }
+  .cardItem__title {
+    display: inline-block;
+    margin: 0;
+    font-size: 18px; }
+  .cardItem__nbQuestions {
+    margin-left: 16px;
+    color: #666; }
+    .cardItem__nbQuestions.done {
+      color: #63991d; }
+  .cardItem__description {
+    color: #555;
+    margin-top: 4px; }

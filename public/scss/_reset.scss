@@ -1,0 +1,23 @@
+* {
+    font-family: 'Roboto';
+}
+
+html, body{
+    margin: 0;
+}
+
+#container{
+    box-sizing: border-box;
+    position: absolute;
+    top: $heightHeader;
+    bottom: 0;
+    width: 100vw;
+    padding: 66px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+    grid-gap: 64px;
+
+    background-color: $off;
+}
