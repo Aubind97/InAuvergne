@@ -71,14 +71,16 @@
     <script>
         // Init logout button
         Login.initLogoutButton();
+
         // Récupère l'utilisateur en session
         document.querySelector('.header__actions__hello__name').innerText = sessionStorage.getItem('username')
+
         // Met en place les process bar
         Process.init()
 
         let quizzData = [{
                 id: 1,
-                name: 'Culture d\'entreprise',
+                name: 'Test Psychotechnique',
                 description: 'Je suis une description',
                 nbQuestions: 10,
                 publishedDate: '2018-01-01'
@@ -87,7 +89,7 @@
                 id: 2,
                 name: 'Méthode agile',
                 description: 'Je suis une description',
-                nbQuestions: 10,
+                nbQuestions: 9,
                 publishedDate: '2018-02-01'
             },
             {

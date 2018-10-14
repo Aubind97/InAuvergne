@@ -17,6 +17,13 @@ class QuizzLister {
         let item = document.createElement('div')
         item.classList.add('cardItem')
 
+    // Ajouter un listener
+    // click => sessionStorgare.setitem('quizz_id') = 1
+    // window.location = 'url
+    item.addEventListener('click', () => {
+        window.location = '/public/pages/quizz.html'
+    })
+
         let title = document.createElement('h1')
         title.innerText = quizzData.name
         title.classList.add('cardItem__title')
