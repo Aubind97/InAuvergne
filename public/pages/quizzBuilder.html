@@ -1,0 +1,51 @@
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Miho | Dashboard</title>
+
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="icon" type="image/png" href="../assets/img/icon.png" />
+</head>
+
+<body>
+    <!-- ON REGARDE SI L'UTILISATEUR EST LOG -->
+    <script src="../assets/js/libs/axios.min.js"></script>
+    <script src="../assets/js/Login.js"></script>
+    <script>
+        Login.isLoggedIn();
+
+    </script>
+
+    <header class="header">
+        <div class="header__brand">
+            <img src="../assets/img/icon.png" alt="Icon de Miho">
+            <h2 class="header__brand__name">Miho</h2>
+        </div>
+        <div class="header__actions">
+            <h2 class="header__actions__hello">Bonjour, <span class="header__actions__hello__name">...</span></h2>
+            <button class="header__actions__logout" id="logoutButton"><i class="fas fa-power-off"></i></button>
+        </div>
+    </header>
+
+    <main id="container2">
+        <div id="formContainer" class="quizzBuilderContainer"></div>
+    </main>
+
+    <script src="../assets/js/QuizzBuilder.js"></script>
+    <script>
+        // Init logout button
+        Login.initLogoutButton();
+        // Récupère l'utilisateur en session
+        document.querySelector('.header__actions__hello__name').innerText = sessionStorage.getItem('username')
+        // Initialisation du QuizzBuilder
+        let quizzBuilder = new QuizzBuilder({
+            container: 'formContainer'
+        })
+
+    </script>
+</body>
+
+</html>

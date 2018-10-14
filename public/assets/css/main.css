@@ -21,6 +21,23 @@ html, body {
   grid-gap: 64px;
   background-color: #ecf0f1; }
 
+#container2 {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  width: 100vw;
+  padding: 66px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #ecf0f1;
+  overflow-y: auto; }
+
 /*!
  * Font Awesome Free 5.3.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -3954,6 +3971,97 @@ readers do not read off random characters that represent icons */
     display: block;
     height: 5px;
     background-color: #c0392b; }
+
+.quizzBuilderContainer {
+  position: relative; }
+  .quizzBuilderContainer label {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 16px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+    .quizzBuilderContainer label span {
+      display: inline-block;
+      width: 240px;
+      text-align: right;
+      margin: 0 16px;
+      font-weight: bold; }
+    .quizzBuilderContainer label input,
+    .quizzBuilderContainer label textarea {
+      border: 2px solid #cfd9db;
+      border-radius: 5px;
+      font-size: 14px;
+      width: 305px; }
+    .quizzBuilderContainer label input {
+      padding: 4px 8px; }
+    .quizzBuilderContainer label textarea {
+      padding: 8px; }
+  .quizzBuilderContainer label.textarea {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start; }
+  .quizzBuilderContainer .addButton {
+    background: none;
+    border: none;
+    height: 48px;
+    font-size: 18px;
+    color: #63991d;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-left: auto;
+    margin: 8px 0 16px auto; }
+    .quizzBuilderContainer .addButton i {
+      margin-left: 8px;
+      font-size: 24px; }
+    .quizzBuilderContainer .addButton:hover {
+      cursor: pointer; }
+  .quizzBuilderContainer .deleteButton {
+    position: absolute;
+    top: 24px;
+    right: 16px;
+    color: #c0392b;
+    background: none;
+    border: none;
+    cursor: pointer; }
+  .quizzBuilderContainer .quizzButton {
+    position: absolute;
+    right: 0;
+    margin-right: 16px;
+    background-color: #34495e;
+    padding: 16px 24px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 18px;
+    border: 2px solid #34495e;
+    border-radius: 8px;
+    -webkit-transition: all, .3s;
+    -o-transition: all, .3s;
+    transition: all, .3s; }
+    .quizzBuilderContainer .quizzButton:hover {
+      background-color: transparent;
+      color: #34495e;
+      cursor: pointer; }
+  .quizzBuilderContainer .questionContainer {
+    position: relative;
+    background-color: #FFF;
+    margin: 16px 0;
+    padding: 16px;
+    border-radius: 5px; }
+    .quizzBuilderContainer .questionContainer h3 {
+      margin-top: 0; }
 
 .card {
   background-color: #FFF;
