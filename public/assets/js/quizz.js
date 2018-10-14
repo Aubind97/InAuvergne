@@ -5,8 +5,13 @@
 
 class Quizz{
 
-    constructor(root,quizzData)
+    constructor(root,quizzData,haveSupportQuestion)
     {
+        this.profile = [0,0,0]; /* kinesthésique, visuel, auditif */
+
+        this.haveSupportQuestion = haveSupportQuestion;
+
+
         this.goodAnswer = 0;
         this.totalAnswer = 0;
         this.init = false;
@@ -25,7 +30,15 @@ class Quizz{
         console.log("test");
         this.setVisibility(this.quizz_button_ready,"hide"); /* on cache le bouton "je suis pret" */
 
-        this.setVisibility(this.quizz_see_support,"show"); /* on fait apparaitre le petit oeil */
+        if(this.haveSupportQuestion == true)
+        {
+            this.quizz_see_support.style.display = "flex"; /* on fait apparaitre le petit oeil */
+        }
+        else{
+            this.quizz_see_support.style.display = "none";
+        }
+        this.setVisibility(this.quizz__question,"show");
+
         this.setVisibility(this.support_question,"hide");
         this.setVisibility(this.quizz__container,"show");
 
@@ -46,16 +59,24 @@ class Quizz{
 
     clickOnResponse(reponse)
     {
-        if(reponse == this.quizzData[this.currentQuestion].correct_response)
+        if(this.haveSupportQuestion == false) /* c'est un test psychotechnique */
         {
-            this.goodAnswer++;
-            console.log("Bien joué !");
+
+            for(let i=0;i < this.quizzData[this.currentQuestion].responses.length;i++)
+            {
+                if(reponse == this.quizzData[this.currentQuestion].responses[i].reponse)
+                {
+                    this.profile[i] += 1;
+                }
+            }
         }
-        else
+        else /* C'est un quizz */
         {
-            console.log("Dommage, mauvaise réponse !");
+            if(reponse == this.quizzData[this.currentQuestion].correct_response)
+            {
+                this.goodAnswer++;
+            }
         }
-        this.totalAnswer++;
 
         this.nextQuestion();
     }
@@ -71,23 +92,32 @@ class Quizz{
             {
                 this.texts[i].innerText = this.quizzData[this.currentQuestion].responses[i].reponse;
             }
+            /* on update la question */
+            this.quizz__question_text.innerText = this.quizzData[this.currentQuestion].question;
 
 
-            this.setVisibility(this.quizz_button_ready,"show"); /* on cache le bouton "je suis pret" */
-            this.setVisibility(this.quizz_see_support,"hide"); /* on fait apparaitre le petit oiel */
-            this.setVisibility(this.support_question,"show");
-            this.setVisibility(this.quizz__container,"hide");
+
         }
         else{
             console.log("fin du quizz");
             this.setVisibility(this.quizz_button_ready,"hide"); /* on cache le bouton "je suis pret" */
             this.setVisibility(this.quizz_see_support,"hide"); /* on fait apparaitre le petit oiel */
+            this.quizz_see_support.style.display = "none";
             this.setVisibility(this.support_question,"hide");
             this.setVisibility(this.quizz__container,"hide");
+            this.setVisibility(this.quizz__question,"hide");
 
             let quizz_resultat = this.createDivWithClass("quizz_resultat");
             let quizz_text_resultat = document.createElement("span");
-            quizz_text_resultat.innerText = "Félicitation vous avez répondu à " + this.goodAnswer + "/" + this.totalAnswer + " questions.";
+
+            /* Calcul des pourcentages */
+
+
+            this.pourcentage_auditif = (this.profile[0] / this.quizzData.length* 100) + "%";
+            this.pourcentage_visuel = this.profile[1] / this.quizzData.length * 100 + "%";
+            this.pourcentage_kine = this.profile[2] / this.quizzData.length * 100 + "%";
+
+            quizz_text_resultat.innerText = "Félicitation voici votre profil : auditif: " + this.pourcentage_auditif + ", visuelle: " + this.pourcentage_visuel + ", kinesthésique: " + this.pourcentage_kine;
             quizz_resultat.appendChild(quizz_text_resultat);
 
             this.container.appendChild(quizz_resultat);
@@ -97,6 +127,7 @@ class Quizz{
     displaySupport(){
         this.setVisibility(this.support_question,"show");
         this.setVisibility(this.quizz_see_support,"hide");
+        this.quizz_see_support.style.display = "none";
     }
 
     setVisibility(element, visibility)
@@ -139,13 +170,20 @@ class Quizz{
         }
         else
         {
-            /* faire l'implémentation du support texte */
+            let support_question_text = document.createElement("span");
+            support_question_text.innerText = this.quizzData[this.currentQuestion].text;
+
+            this.support_question.appendChild(support_question_text);
         }
+
+
+
         this.container.appendChild(this.support_question);
 
         this.quizz_see_support = this.createDivWithClass("hide","quizz_see_support");
         let eye = document.createElement("i");
         eye.setAttribute("class","fas fa-eye");
+        this.quizz_see_support.style.display = "none";
         this.quizz_see_support.appendChild(eye);
 
         this.container.appendChild(this.quizz_see_support);
@@ -154,13 +192,22 @@ class Quizz{
 
         this.quizz__container = this.createDivWithClass("hide","quizz_response_container");
 
+        /* Affichage de la question */
+        this.quizz__question = this.createDivWithClass("hide","quizz_question");
+        this.quizz__question_text = document.createElement("span");
+        this.quizz__question_text.innerText = this.quizzData[this.currentQuestion].question;
+        this.quizz__question.appendChild(this.quizz__question_text);
+
+        this.container.appendChild(this.quizz__question)
+
+        /* Affichage des réponses */
         for(let i=0;i < this.quizzData[this.currentQuestion].responses.length;i++)
         {
             let reponse = this.createDivWithClass("hide","quizz_reponse");
             this.div_reponses.push(reponse);
             let circle = this.createDivWithClass("quizz_reponse_circle");
             let text_circle = document.createElement("span");
-            text_circle.innerText = i;
+            text_circle.innerText = i+1;
             circle.appendChild(text_circle);
 
             let texte = this.createDivWithClass("quizz_reponse_text");
@@ -218,51 +265,139 @@ class Quizz{
 document.addEventListener('DOMContentLoaded', function () {
 
     let quizzData = [{
-        nom_quizz: "Quizz : Les capitales",
+        nom_quizz: "Test Psychotechnique",
         id_question: 1,
-        question: "Savez-vous quelle est la capitale de la France ?",
-        url_img: "italie.jpg",
+        question: "Imaginez que vous avez très envie de manger une pomme, vous vous la représentez",
+        url_img: "",
         text: "",
         lien_video: "",
         responses : [
-            {reponse: "Paris"},
-            {reponse: "Marseille"},
-            {reponse: "Toulouse"},
-            {reponse: "Cognac"}],
-        correct_response: "Paris"
+            {reponse: "Croquante sous la dent"},
+            {reponse: "Brillante, d'une belle couleur"},
+            {reponse: "D'une jolie forme ronde, agréable dans la main"}],
+        correct_response: ""
     },
     {
-        nom_quizz: "Quizz : Les capitales",
+        nom_quizz: "Test Psychotechnique",
         id_question: 2,
-        question: "Savez-vous quelle est la capitale de l'Italie ?",
-        url_img: "italie.jpg",
+        question: "Le terme \"pompiers\" vous évoque en priorité",
+        url_img: "",
         text: "",
         lien_video: "",
         responses : [
-            {reponse: "Rome"},
-            {reponse: "Venise"},
-            {reponse: "Turin"},
-            {reponse: "Milan"}],
-        correct_response: "Rome"
+            {reponse: "La sirène"},
+            {reponse: "Le camion rouge avec tout le matériel : la lance, les tuyaux, l'échelle, etc."},
+            {reponse: "Le feu, l'incendie, le brûlé"}],
+        correct_response: ""
     },
     {
-        nom_quizz: "Quizz : Les capitales",
+        nom_quizz: "Test Psychotechnique",
         id_question: 3,
-        question: "Savez-vous quelle est la capitale de l'Italie ?",
-        url_img: "italie.jpg",
+        question: "Ce que vous appréciez le plus, lorsque vous prenez votre petit-déjeuner dans un café, c'est",
+        url_img: "",
         text: "",
         lien_video: "",
         responses : [
-            {reponse: "Rome"},
-            {reponse: "Venise"},
-            {reponse: "Turin"},
-            {reponse: "Milan"}],
-        correct_response: "Rome"
+            {reponse: "L'ambiance des gens qui discutent"},
+            {reponse: "Le cadre, le décor"},
+            {reponse: "L'odeur du café"}],
+        correct_response: ""
+    },
+    {
+        nom_quizz: "Test Psychotechnique",
+        id_question: 3,
+        question: "Chez un bébé, le plus \"délicieux\", c'est",
+        url_img: "",
+        text: "",
+        lien_video: "",
+        responses : [
+            {reponse: "Ses gazouillis"},
+            {reponse: "Sa douceur"},
+            {reponse: "Son sourire"}],
+        correct_response: ""
+    },
+    {
+        nom_quizz: "Test Psychotechnique",
+        id_question: 3,
+        question: "Lorsque vous pensez à la mer, qu'est -ce qui est le plus évocateur pour vous ?",
+        url_img: "",
+        text: "",
+        lien_video: "",
+        responses : [
+            {reponse: "Le bruit des vagues"},
+            {reponse: "Le vent, l'iode"},
+            {reponse: "Le contact de l'eau sur votre corps"}],
+        correct_response: ""
+    },
+    {
+        nom_quizz: "Test Psychotechnique",
+        id_question: 3,
+        question: "Lorsque vous évoquez la campagne au printemps, vous pensez surtout",
+        url_img: "",
+        text: "",
+        lien_video: "",
+        responses : [
+            {reponse: "Au chant des oiseaux"},
+            {reponse: "À la végétation, aux arbres en fleurs"},
+            {reponse: "Aux grandes balades à pied et à la saine fatigue physique"}],
+        correct_response: ""
+    },
+    {
+        nom_quizz: "Test Psychotechnique",
+        id_question: 3,
+        question: "Lorsque vous flânez dans une librairie, le plus agréable :",
+        url_img: "",
+        text: "",
+        lien_video: "",
+        responses : [
+            {reponse: "Écouter les conversations, discuter avec le libraire"},
+            {reponse: "Lire quelques lignes, regarder les couvertures"},
+            {reponse: "Feuilleter les livres, les prendre dans vos mains"}],
+        correct_response: ""
+    },
+    {
+        nom_quizz: "Test Psychotechnique",
+        id_question: 3,
+        question: "Lorsque vous êtes d'humeur mélancolique, qu'est-ce qui vous tire le plus facilement une larme?",
+        url_img: "",
+        text: "",
+        lien_video: "",
+        responses : [
+            {reponse: "Écouter de la musique classique"},
+            {reponse: "Regarder de vieilles photos"},
+            {reponse: "Vous promener sous la pluie"}],
+        correct_response: ""
+    },
+    {
+        nom_quizz: "Test Psychotechnique",
+        id_question: 3,
+        question: "Parmi ces critères, lequel est prioritaire dans le choix d'un nouvel appartement",
+        url_img: "",
+        text: "",
+        lien_video: "",
+        responses : [
+            {reponse: "Un endroit silencieux, un environnement agréable"},
+            {reponse: "Une cuisine spacieuse, pratique 4"},
+            {reponse: "Une vue imprenable"}],
+        correct_response: ""
+    },
+    {
+        nom_quizz: "Votre gâteau préféré, lorsque vous y pensez",
+        id_question: 3,
+        question: "Lorsque vous flânez dans une librairie, le plus agréable :",
+        url_img: "",
+        text: "",
+        lien_video: "",
+        responses : [
+            {reponse: "Vous en sentez la texture"},
+            {reponse: "Vous le visualisez"},
+            {reponse: "Vous voyez déjà votre cuillère plongée à l'intérieur…"}],
+        correct_response: ""
     }];
 
 
     // Creation d'une classe pour le quizz
-    new Quizz(document.getElementsByClassName("quizz")[0],quizzData);
+    new Quizz(document.getElementsByClassName("quizz")[0],quizzData,false);
     console.log("coucou");
 })
 
