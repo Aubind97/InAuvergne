@@ -3971,6 +3971,12 @@ readers do not read off random characters that represent icons */
     display: block;
     height: 5px;
     background-color: #c0392b; }
+  .process--other {
+    content: '';
+    position: absolute;
+    display: block;
+    height: 5px;
+    background-color: #34495e; }
 
 .quizzBuilderContainer {
   position: relative; }
