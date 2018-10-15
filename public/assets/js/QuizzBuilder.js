@@ -59,6 +59,10 @@ class QuizzBuilder {
         button.innerText = 'Finaliser le Quizz'
         button.classList.add('quizzButton')
 
+        button.addEventListener('click', () => {
+            window.location = '/public/pages/dashboard.html'
+        })
+
         this.container.appendChild(title)
         this.container.appendChild(titleLabel)
         this.container.appendChild(descriptionLabel)
@@ -112,6 +116,13 @@ class QuizzBuilder {
         srcInputT.type = 'file'
         srcLabelT.appendChild(srcInputT)
 
+        let questionLabels = document.createElement('label')
+        let questionSpan = document.createElement('span')
+        questionSpan.innerText = 'Question'
+        questionLabels.appendChild(questionSpan)
+        let questionInput = document.createElement('input')
+        questionLabels.appendChild(questionInput)
+
         let headerResponses = document.createElement('h3')
         headerResponses.innerText = "Réponses possible"
 
@@ -121,6 +132,7 @@ class QuizzBuilder {
         container.appendChild(srcLabelA)
         container.appendChild(srcLabelT)
         container.appendChild(headerResponses)
+        container.appendChild(questionLabels)
 
         // Réponses possible
         for (let i = 0; i < 4; i++) {

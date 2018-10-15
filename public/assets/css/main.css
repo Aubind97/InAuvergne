@@ -4094,7 +4094,7 @@ span, h1, p {
     align-items: center; }
     .loginCard__form label span {
       display: inline-block;
-      width: 100px;
+      width: 150px;
       text-align: right; }
     .loginCard__form input {
       border: 1px solid #ecf0f1;
