@@ -1,0 +1,45 @@
+.header{
+    display: flex;
+    justify-content: space-around;
+    height: $heightHeader;
+    width: 100%;
+
+    &__brand{
+        display: inline-flex;
+        align-items: center;
+
+        img{
+            height: 60%;
+        }
+
+        &__name{
+            margin: 16px;
+        }
+    }
+
+    &__actions{
+        display: inline-flex;
+        align-items: center;
+
+        &__hello{
+            font-size: 20px;
+            font-weight: normal;
+
+            &__name{
+                font-weight: bold;
+            }
+        }
+
+        &__logout{
+            margin-left: 16px;
+            border: none;
+            background: none;
+            font-size: 24px;
+
+            &:hover{
+                cursor: pointer;
+                color: $danger;
+            }
+        }
+    }
+}
